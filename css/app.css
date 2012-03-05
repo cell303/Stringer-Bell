@@ -1,0 +1,278 @@
+* {
+	line-height:100%;
+}
+
+h1, h1 a {
+	font-family: Pacifico;
+	font-weight: normal!important;
+	text-decoration: none!important;
+	font-size: 18px;
+	letter-spacing: 1px;
+	overflow: visible!important;
+}
+
+audio {
+	display: none;
+}
+
+.clock-text {
+	position:absolute;
+	top:20%;
+	left:20%;
+	width:60%;
+	height:60%;
+}
+
+.clock-name {
+	position:relative;
+	top:55%;
+}
+
+.tag-line, .by {
+	position:relative;
+	text-transform: uppercase;
+	letter-spacing: 0.2em;
+	text-shadow:none;
+}
+.tag-line {
+	font-weight:normal;
+	top:60%;
+	width:85%;
+	margin:auto;
+	padding:5px 0;
+	line-height:1.5;
+}
+
+.by {
+	top:62%;
+}
+
+.panel {
+	position: absolute;
+	top:0;
+	left:0;
+	width: 100%;
+	height: 100%;
+}
+
+.panel img {
+	width: 100%;
+	height: 100%;
+}
+
+.c50, .c25 {
+	min-height:1px;
+	float:none;
+}
+
+.c50 {
+	width: 100%;
+}
+
+.c25 {
+	width: 100%;
+}
+
+#clock, .sub-clock {
+	margin:auto;
+	text-align:center;
+	position:relative;
+	font-family: 'Prata', Times New Roman, serif;
+	background:#fff;
+	border: 2px solid #777;
+	color:#444;
+
+	-webkit-border-radius: 100%;
+	-moz-border-radius: 100%;
+	border-radius: 100%;
+
+	background: rgb(255,255,255); /* Old browsers */
+	background: -moz-linear-gradient(top, rgba(255,255,255,1) 0%, rgba(237,237,237,1) 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(255,255,255,1)), color-stop(100%,rgba(237,237,237,1))); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top, rgba(255,255,255,1) 0%,rgba(237,237,237,1) 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top, rgba(255,255,255,1) 0%,rgba(237,237,237,1) 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top, rgba(255,255,255,1) 0%,rgba(237,237,237,1) 100%); /* IE10+ */
+	background: linear-gradient(top, rgba(255,255,255,1) 0%,rgba(237,237,237,1) 100%); /* W3C */
+
+	-webkit-box-shadow: 0px 5px 20px 0px #aaa;
+	-moz-box-shadow: 0px 5px 20px 0px #aaa;
+	box-shadow: 0px 5px 20px 0px #aaa;
+}
+
+.sub-clock {
+	position:absolute;
+	top: 55%;
+	left: 37.5%;
+	border: 1px solid #999;
+	-webkit-box-shadow: none;
+	-moz-box-shadow: none;
+	box-shadow: none;
+	background:#eee;
+}
+
+.sub-clock .sub-clock {
+	border: none
+}
+
+#settings, #tasks {
+	margin: auto;
+	margin-top: 25px;
+	margin-bottom: 25px;
+}
+
+#settings h2, #tasks h2 {
+	text-align: center;
+	margin-bottom:5px;
+}
+#settings p, #tasks p {
+	font-size:12px;
+	line-height:125%;
+	margin-bottom:5px;
+}
+
+#tasks .task-input {
+	margin: 1em 0;
+}
+
+.play-bar {
+	text-align:center;
+	margin:0 0 15px 0;
+}
+.round  {
+	display:inline-block;
+	position:relative;
+	width: 50px;
+	height: 50px;
+	margin-left: 2px;
+	margin-right: 2px;
+	-webkit-border-radius: 100%!important;
+	-moz-border-radius: 100%!important;
+	border-radius: 100%!important;
+}
+
+.round .ui-btn-inner {
+	margin:0;
+	padding:0;
+	width:100%;
+	height:100%;
+}
+
+.round .ui-icon {
+	display:none;
+	width:36px;
+	height:36px;
+	left:2px;
+	top:10px;
+	-webkit-border-radius: 100%!important;
+	-moz-border-radius: 100%!important;
+	border-radius: 100%!important;
+}
+
+/*
+#prev, #next {
+	width:40px;
+	height:40px;
+	bottom:5px;
+}
+*/
+
+#prev .ui-icon {
+	background-color: #8ac3e9;
+}
+
+#next .ui-icon {
+	background-color: #6496b4;
+}
+
+.hand {
+	width: 12%;
+	height: 100%;
+	position: absolute;	
+	left:50%;
+	margin-left:-6%;
+	top:0%;
+}
+
+.hand img {
+	width:100%;
+	height:100%;
+}
+
+.number {
+	position:absolute;
+	top:0;
+	left:0;
+	margin-top: -16px;
+	margin-left: -40px;
+	width:85px;
+}
+
+.numbers {
+	position:absolute;
+	top:1%;
+	left:1%;
+	width:98%;
+	height:98%;
+}
+
+.numbers :nth-child(12) {
+	left:50%;
+	top: 8%;
+}
+.numbers :nth-child(1) {
+	left: 71%;
+	top: 14%;
+}
+.numbers :nth-child(2) {
+	left: 86%;
+	top: 29%;
+}
+.numbers :nth-child(3) {
+	left:92%;
+	top: 50%;
+}
+.numbers :nth-child(4) {
+	left:86%;
+	top: 71%
+}
+.numbers :nth-child(5) {
+	left:71%;
+	top: 86%;
+}
+.numbers :nth-child(6) {
+	left:50%;
+	top: 92%;
+}
+.numbers :nth-child(7) {
+	left:29%;
+	top: 86%;
+}
+.numbers :nth-child(8) {
+	left: 14%;
+	top: 71%;
+}
+.numbers :nth-child(9) {
+	left:8%;
+	top: 50%;
+}
+.numbers :nth-child(10) {
+	left: 14%;
+	top: 29%;
+}
+.numbers :nth-child(11) {
+	left:29%;
+	top: 14%;
+}
+
+@media screen and (min-width: 1024px) {
+	.c50 {
+		width:50%;	
+		float:left;	
+	}
+	
+	.c25 {
+		width:25%;	
+		float:left;	
+	}
+}
+
