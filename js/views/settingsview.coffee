@@ -3,66 +3,66 @@
 # @version 1
 
 define([
-	'jquery'
-	'underscore'
-	'backbone'
-	'text!templates/settings.html'
+  'jquery'
+  'underscore'
+  'backbone'
+  'text!templates/settings.html'
 ], ($, _, Backbone, settingsTemplate) ->
 
-	# This view represents the settings and sets them on the model
-	# Therefore, it is more of a controller than a view
-	class SettingsView extends Backbone.View
-		
-		# Binds methods and renders the content.
-		initialize: ->
-			$(window).bind('resize', @resize)
-			@render()
+  # This view represents the settings and sets them on the model
+  # Therefore, it is more of a controller than a view
+  class SettingsView extends Backbone.View
+    
+    # Binds methods and renders the content.
+    initialize: ->
+      $(window).bind('resize', @resize)
+      @render()
 
-		# The pre-compiled underscore template for the settings.
-		template: _.template(settingsTemplate)
+    # The pre-compiled underscore template for the settings.
+    template: _.template(settingsTemplate)
 
-		# Redraws the settings content,
-		# initializes the jQuery Mobile widgets and 
-		# adjusts the size.
-		render: =>
-			@$el.html(@template(@model.toJSON())).trigger('create')
-			@$('#slider-0, #slider-1').slider(theme: 'a', mini:true, highlight: true)
+    # Redraws the settings content,
+    # initializes the jQuery Mobile widgets and 
+    # adjusts the size.
+    render: =>
+      @$el.html(@template(@model.toJSON())).trigger('create')
+      @$('#slider-0, #slider-1').slider(theme: 'a', mini:true, highlight: true)
 
-		# Binds methods to events that occur within this view.
-		events: ->
-			'change #slider-0': @setWorkTime
-			'change #slider-1': @setFreeTime
-			'click #button-0': @allowNotifications
-			'click #stop': @stopClock
-			'click #prev': @resetToWorktime
-			'click #next': @resetToFreetime
-			'change #flip-a': @toggleSound
+    # Binds methods to events that occur within this view.
+    events: ->
+      'change #slider-0': @setWorkTime
+      'change #slider-1': @setFreeTime
+      'click #button-0': @allowNotifications
+      'click #stop': @stopClock
+      'click #prev': @resetToWorktime
+      'click #next': @resetToFreetime
+      'change #flip-a': @toggleSound
 
-		toggleSound: (event) =>
-			@model.set('sound': !@model.get('sound'))
+    toggleSound: (event) =>
+      @model.set('sound': !@model.get('sound'))
 
-		# Passes the new value to the model.
-		setWorkTime: =>
-			@model.setWorkTime(parseInt($('#slider-0').val()))
+    # Passes the new value to the model.
+    setWorkTime: =>
+      @model.setWorkTime(parseInt($('#slider-0').val()))
 
-		# Passes the new value to the model.
-		setFreeTime: =>
-			@model.setFreeTime(parseInt($('#slider-1').val()))
+    # Passes the new value to the model.
+    setFreeTime: =>
+      @model.setFreeTime(parseInt($('#slider-1').val()))
 
-		# Asks the user to allow desktop notifications.
-		allowNotifications: =>
-			window.webkitNotifications.requestPermission()
-		#
-		stopClock: =>
-			@model.stopClock()
+    # Asks the user to allow desktop notifications.
+    allowNotifications: =>
+      window.webkitNotifications.requestPermission()
+    #
+    stopClock: =>
+      @model.stopClock()
 
-		#
-		resetToWorktime: =>
-			@model.resetToWorktime()
+    #
+    resetToWorktime: =>
+      @model.resetToWorktime()
 
-		#
-		resetToFreetime: =>
-			@model.resetToFreetime()
+    #
+    resetToFreetime: =>
+      @model.resetToFreetime()
 
-	return SettingsView
+  return SettingsView
 )

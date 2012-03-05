@@ -3,28 +3,28 @@
 # @version 1
 
 define([
-	'jquery'
-	'underscore'
-	'backbone'
-	'text!templates/tasks.html'
+  'jquery'
+  'underscore'
+  'backbone'
+  'text!templates/tasks.html'
 ], ($, _, Backbone, tasksTemplate) ->
 
-	# This view represents the settings and sets them on the model
-	# Therefore, it is more of a controller than a view
-	class TasksView extends Backbone.View
-		
-		# Binds methods and renders the content.
-		initialize: ->
-			@render()
+  # This view represents the settings and sets them on the model
+  # Therefore, it is more of a controller than a view
+  class TasksView extends Backbone.View
+    
+    # Binds methods and renders the content.
+    initialize: ->
+      @render()
 
-		# The pre-compiled underscore template for the settings.
-		template: _.template(tasksTemplate)
+    # The pre-compiled underscore template for the settings.
+    template: _.template(tasksTemplate)
 
-		# Redraws the settings content,
-		# initializes the jQuery Mobile widgets and 
-		# adjusts the size.
-		render: =>
-			@$el.html(@template(@model.toJSON())).trigger('create')
+    # Redraws the settings content,
+    # initializes the jQuery Mobile widgets and 
+    # adjusts the size.
+    render: =>
+      @$el.html(@template(@model.toJSON())).trigger('create')
 
-	return TasksView
+  return TasksView
 )

@@ -1,26 +1,26 @@
 <h2>Control</h2>
 <div class="play-bar" data-role="fieldcontain">
-	<a id="prev" data-role="button" data-icon="arrow-l" data-mini="true" title="Start worktime">Start worktime</a>
-	<a id="next" data-role="button" data-icon="arrow-l" data-mini="true" title="Take a break">Take a break</a>
-	<a id="stop" data-role="button" data-icon="arrow-l" data-mini="true" title="Stop clock">Stop clock</a>
+  <a id="prev" data-role="button" data-icon="arrow-l" data-mini="true" title="Start worktime">Start worktime</a>
+  <a id="next" data-role="button" data-icon="arrow-l" data-mini="true" title="Take a break">Take a break</a>
+  <a id="stop" data-role="button" data-icon="arrow-l" data-mini="true" title="Stop clock">Stop clock</a>
 </div>
 <h2>Settings</h2>
 <div>
-	<label for="slider-0">Define your work time:</label>
-	<input type="range" name="slider" id="slider-0" value="<%= workTime %>" min="1" max="50" step="1" data-mini="true" data-highlight="true"/>
-</div>                                                                                                                 
-<div>                                                                                                                  
-	<label for="slider-1">Define your free time:</label>                                                   
-	<input type="range" name="slider" id="slider-1" value="<%= freeTime %>" min="1" max="10" step="1" data-mini="true" data-highlight="true"/>
+  <label for="slider-0">Define your work time:</label>
+  <input type="range" name="slider" id="slider-0" value="<%= workTime %>" min="1" max="50" step="1" data-mini="true" data-highlight="true"/>
+</div>
+<div>
+  <label for="slider-1">Define your free time:</label>
+  <input type="range" name="slider" id="slider-1" value="<%= freeTime %>" min="1" max="10" step="1" data-mini="true" data-highlight="true"/>
 </div>
 <div data-role="fieldcontain">
-	<p>If your Browser supports HTML5 audio you can let Stringer Bell play a sound when it's time to take a break:</p>
-	<select name="slider" id="flip-a" data-role="slider" data-mini="true">
-		<option value="on">On</option>
-		<option value="off">Off</option>
-	</select> 
+  <p>If your Browser supports HTML5 audio you can let Stringer Bell play a sound when it's time to take a break:</p>
+  <select name="slider" id="flip-a" data-role="slider" data-mini="true">
+    <option value="on">On</option>
+    <option value="off">Off</option>
+  </select> 
 </div>
 <div data-role="fieldcontain">
-	<p>If your Browser supports HTML5 notifications you can allow Stringer Bell to use them by clicking this button:</p>
-	<a id="button-0" data-role="button" data-mini="true">Allow notifications</a>
+  <p>If your Browser supports HTML5 notifications you can allow Stringer Bell to use them by clicking this button:</p>
+  <a id="button-0" data-role="button" data-mini="true">Allow notifications</a>
 </div>
