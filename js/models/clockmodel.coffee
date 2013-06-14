@@ -1,4 +1,5 @@
-# @fileOverview A simple alarm clock (bell) that tells you when it's time to take a break.
+# @fileOverview A simple alarm clock (bell) that tells you when it's time to 
+# take a break.
 # @author <a href="https://www.twitter.com/cell303">@cell303</a>
 # @version 1
 
@@ -88,17 +89,22 @@ define([
       if @canShowNotifications
         if window.webkitNotifications.checkPermission() is 0
           if @get('isBreak')
-            window.webkitNotifications.createNotification(
+            notification = window.webkitNotifications.createNotification(
               '/images/icon128.png',
               'Your break is over!',
               ''
-            ).show()
+            )
           else
-            window.webkitNotifications.createNotification(
+            notification = window.webkitNotifications.createNotification(
               '/images/icon128.png',
               'Time to take a break!',
               ''
-            ).show()
+            )
+
+          notification.show()
+          setTimeout ->
+            notification.cancel()
+          , 10000
 
       if not @get('isBreak') and @get('sound')
         if @canPlayMp3 or @canPlayOgg

@@ -1,12 +1,12 @@
 CACHE MANIFEST
-# :1
+# :3
 
 # css
-css/main.min.css
+css/main.css
 
 # js
-js/require.js
-js/main.min.js
+js/libs/require.js
+js/main.js
 
 # images
 images/icon16.png
@@ -26,8 +26,8 @@ css/images/icons-36-white.png
 css/images/icon-search-black.png
 
 #audio
-audio/copcarsiren.mp3
-audio/copcarsiren.ogg
+audio/schoolbell.mp3
+audio/schoolbell.ogg
 
 # fonts
 http://fonts.googleapis.com/css?family=Pacifico|Prata

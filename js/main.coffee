@@ -27,7 +27,7 @@ require [
       el: $(event.target).find('#clock')
       model: clockModel
       scale: .8
-      sync: true
+      sync: false
     )
 
     #subClockView = new ClockView(

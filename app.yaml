@@ -16,10 +16,11 @@ handlers:
 - url: /audio
   static_dir: audio
   
-- url: /favicon\.ico
-  static_files: images/favicon.ico
-  upload: images/favicon\.ico
- 
+- url: /cache.manifest
+  mime_type: text/cache-manifest 
+  static_files: cache.manifest 
+  upload: cache.manifest 
+
 - url: /.*
   script: app.py
 

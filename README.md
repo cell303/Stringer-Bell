@@ -1,4 +1,3 @@
 # Stringer Bell
 
-![Screenshot](http://i.imgur.com/865PUyel.png)
-
+![Screenshot](http://i.imgur.com/865PUyeh.png)
