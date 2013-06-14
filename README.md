@@ -4,7 +4,7 @@
 
 Stringer Bell is a simple time management tool. It reminds you to take a short break every X minutes. It's built using HTML5 web technologies and runs in any modern browser without any plug-ins.
 
-(Working Demo)[http://stringerbellapp.appspot.com]
+[Working Demo](http://stringerbellapp.appspot.com)
 
 # Tech
 
