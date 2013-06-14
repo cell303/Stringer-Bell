@@ -4,6 +4,7 @@
 
 [Stringer Bell](http://stringerbellapp.appspot.com) is a simple time management tool. It reminds you to take a short break every X minutes via sound or desktop notification. It's built using HTML5 web technologies and runs in any modern browser.
 
+
 ## Tech
 
 The technologies used include:
@@ -16,3 +17,6 @@ The technologies used include:
     * Notification API
     * Audio
 * CSS3
+
+## Trivia
+In case you're wondering: Yes, the app is named after the character of the HBO series The Wire. It also makes bell sounds.
