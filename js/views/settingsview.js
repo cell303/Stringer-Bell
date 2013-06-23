@@ -10,8 +10,6 @@
       __extends(SettingsView, _super);
 
       function SettingsView() {
-        this.resetToFreetime = __bind(this.resetToFreetime, this);
-        this.resetToWorktime = __bind(this.resetToWorktime, this);
         this.stopClock = __bind(this.stopClock, this);
         this.allowNotifications = __bind(this.allowNotifications, this);
         this.setFreeTime = __bind(this.setFreeTime, this);
@@ -44,8 +42,8 @@
           'change #slider-1': this.setFreeTime,
           'click #button-0': this.allowNotifications,
           'click #stop': this.stopClock,
-          'click #prev': this.resetToWorktime,
-          'click #next': this.resetToFreetime,
+          'click #prev': this.prev,
+          'click #next': this.next,
           'change #flip-a': this.toggleSound
         };
       };
@@ -72,12 +70,20 @@
         return this.model.stopClock();
       };
 
-      SettingsView.prototype.resetToWorktime = function() {
-        return this.model.resetToWorktime();
+      SettingsView.prototype.prev = function() {
+        if (this.model.get("isBreak")) {
+          return this.model.resetToFreetime();
+        } else {
+          return this.model.resetToWorktime();
+        }
       };
 
-      SettingsView.prototype.resetToFreetime = function() {
-        return this.model.resetToFreetime();
+      SettingsView.prototype.next = function() {
+        if (this.model.get("isBreak")) {
+          return this.model.resetToWorktime();
+        } else {
+          return this.model.resetToFreetime();
+        }
       };
 
       return SettingsView;

@@ -34,7 +34,7 @@ define [
       diff = Math.round(diff / 60000)
       json = _.extend @model.toJSON(),
         time: diff
-        date: new Date(@model.get("date")).toString()
+        #date: new Date(@model.get("date")).toString()
 
       @$el.html(@template(json))
       @$el.toggleClass 'break', @model.get('isBreak')

@@ -34,8 +34,8 @@ define([
       'change #slider-1': @setFreeTime
       'click #button-0': @allowNotifications
       'click #stop': @stopClock
-      'click #prev': @resetToWorktime
-      'click #next': @resetToFreetime
+      'click #prev': @prev
+      'click #next': @next
       'change #flip-a': @toggleSound
 
     toggleSound: (event) =>
@@ -56,11 +56,17 @@ define([
     stopClock: =>
       @model.stopClock()
 
-    resetToWorktime: =>
-      @model.resetToWorktime()
+    prev: ->
+      if @model.get("isBreak")
+        @model.resetToFreetime()
+      else
+        @model.resetToWorktime()
 
-    resetToFreetime: =>
-      @model.resetToFreetime()
+    next: ->
+      if @model.get("isBreak")
+        @model.resetToWorktime()
+      else
+        @model.resetToFreetime()
 
   return SettingsView
 )

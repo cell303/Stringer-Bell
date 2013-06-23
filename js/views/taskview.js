@@ -46,8 +46,7 @@
         diff = this.model.get('date') - this.model.get('startDate');
         diff = Math.round(diff / 60000);
         json = _.extend(this.model.toJSON(), {
-          time: diff,
-          date: new Date(this.model.get("date")).toString()
+          time: diff
         });
         this.$el.html(this.template(json));
         this.$el.toggleClass('break', this.model.get('isBreak'));
