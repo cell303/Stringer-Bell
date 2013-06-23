@@ -1,0 +1,24 @@
+<p class="muted">
+  <time><%= date %></time> (<%= time %> minutes)
+</p>
+<% if(text.length > 0) { %>
+  <p><%= text %></p>
+<% } else { %>
+  <% if(edit) { %>
+    <textarea rows="3" placeholder="What have you been doing the last <%= time %> minutes?"/>
+    <div class="btn-group pull-right">
+      <button class="save btn btn-primary">Save</button>
+      <button class="cancel btn">Cancel</button>
+    </div>
+    <p class="lead pull-right">140</p>
+    <div class="clearfix"/>
+    <!--<div class="checkbox">
+       <label>
+         <input type="checkbox" checked> Tweet
+       </label>
+     </div>-->
+  <% } else { %>
+    <button type="button" class="edit btn">Write a message</button>
+  <% } %>
+<% } %>
+

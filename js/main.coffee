@@ -2,7 +2,7 @@
 # @author <a href="https://www.twitter.com/cell303">@cell303</a>
 # @version 1
 
-require.config(
+require.config
   paths:
     jquery: 'http://code.jquery.com/jquery-1.7.1.min'
     jquerymobile: 'http://code.jquery.com/mobile/1.1.0-rc.1/jquery.mobile-1.1.0-rc.1.min'
@@ -10,7 +10,7 @@ require.config(
     backbone: 'libs/backbone-min'
     order: 'libs/order'
     text: 'libs/text'
-)
+    bootstrap: 'libs/bootstrap'
 
 require [
   'jquery'
@@ -22,13 +22,12 @@ require [
 
   clockModel = new ClockModel(id: 'clock')
 
-  $('.ui-page').live('pageshow', (event, ui) ->
-    clockView = new ClockView(
+  $('.ui-page').live 'pageshow', (event, ui) ->
+    clockView = new ClockView
       el: $(event.target).find('#clock')
       model: clockModel
       scale: .8
-      sync: false
-    )
+      sync: true
 
     #subClockView = new ClockView(
     # el: '#clock .sub-clock'
@@ -37,13 +36,10 @@ require [
     # sync: false
     #)
     
-    settingsView = new SettingsView(
+    settingsView = new SettingsView
       el: '#settings'
       model: clockModel
-    )
 
-    #tasksView = new TasksView(
-    # el: '#tasks'
-    # model: clockModel
-    #)
-  )
+    tasksView = new TasksView
+      el: '#tasks'
+      model: clockModel

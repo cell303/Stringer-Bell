@@ -6,8 +6,10 @@
 define([
   'underscore'
   'backbone'
+  'collections/taskscollection'
+  'models/taskmodel'
   'libs/backbone.localstorage'
-], (_, Backbone, Store) ->
+], (_, Backbone, TasksCollection, TaskModel, Store) ->
 
   # Implements the logic of a stop watch.
   class ClockModel extends Backbone.Model
@@ -29,10 +31,16 @@ define([
       sound: true
 
     # Sets initial values and starts the interval.
-    initialize: ->
+    initialize: =>
       @fetch()
       @startClock()
       @checkSupport()
+
+      @startDate = new Date().getTime()
+
+      @tasks = new TasksCollection
+      @tasks.fetch()
+      @tasks.sort()
 
     # Updates the values of the clock.
     # This function has to be called every 1 sec.
@@ -85,21 +93,24 @@ define([
 
     # Notifies the user that a time slice has been completed.
     # Currently only chrome/html5 notifications are supproted.
-    notifyUser: ->
+    notifyUser: =>
       if @canShowNotifications
         if window.webkitNotifications.checkPermission() is 0
           if @get('isBreak')
-            notification = window.webkitNotifications.createNotification(
-              '/images/icon128.png',
-              'Your break is over!',
-              ''
-            )
+            notification = window.webkitNotifications.createNotification '/images/icon128.png', 'Your break is over!', ''
           else
-            notification = window.webkitNotifications.createNotification(
-              '/images/icon128.png',
-              'Time to take a break!',
-              ''
-            )
+            notification = window.webkitNotifications.createNotification '/images/icon128.png', 'Time to take a break!', ''
+
+            task = new TaskModel 
+              isBreak: @get('isBreak') 
+              startDate: @startDate
+              date: new Date().getTime()
+              edit: true
+
+            task.save()
+            @tasks.add task
+
+          @startDate = new Date().getTime()
 
           notification.show()
           setTimeout ->
@@ -186,6 +197,8 @@ define([
     # Pauses the clock by clearing the interval.
     stopClock: =>
       if @interval? then clearInterval(@interval)
+
+    tweet: (text) ->
 
     # Wrapper for the localStorage.
     localStorage: new Store('clock')

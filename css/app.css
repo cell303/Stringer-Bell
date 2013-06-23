@@ -2,9 +2,18 @@
 	line-height:100%;
 }
 
-h1, h1 a {
+body {
+  padding: 25px;
+  background-color: #f0f0f0;
+  font-family: Georgia;
+}
+ 
+h1, h2, h3, h4, h5, h6 {
 	font-family: Pacifico;
 	font-weight: normal!important;
+}
+
+h1, h1 a {
 	text-decoration: none!important;
 	font-size: 18px;
 	letter-spacing: 1px;
@@ -47,7 +56,7 @@ audio {
 	top:62%;
 }
 
-.panel {
+.clock-panel {
 	position: absolute;
 	top:0;
 	left:0;
@@ -55,7 +64,7 @@ audio {
 	height: 100%;
 }
 
-.panel img {
+.clock-panel img {
 	width: 100%;
 	height: 100%;
 }
@@ -79,7 +88,6 @@ audio {
 	position:relative;
 	font-family: 'Prata', Times New Roman, serif;
 	background:#fff;
-	border: 2px solid #777;
 	color:#444;
 
 	-webkit-border-radius: 100%;
@@ -125,7 +133,6 @@ audio {
 	margin-bottom:5px;
 }
 #settings p, #tasks p {
-	font-size:12px;
 	line-height:125%;
 	margin-bottom:5px;
 }
@@ -136,7 +143,7 @@ audio {
 
 .play-bar {
 	text-align:center;
-	margin:0 0 15px 0;
+	margin: 20px 0;
 }
 .round  {
 	display:inline-block;
@@ -276,3 +283,43 @@ audio {
 	}
 }
 
+#timeline {
+  margin: 0;
+  padding: 0;
+  margin-top: 20px; 
+  list-style: none;
+}
+
+.task {
+  margin-bottom: 1em;
+  padding-bottom: 1em;
+  border-bottom: 1px solid #ccc;
+}
+
+.task textarea {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.task .lead {
+  margin-right: 5px;
+}
+
+
+/*
+#prev .ui-icon {
+	background-color: #8ac3e9;
+}
+
+#next .ui-icon {
+	background-color: #6496b4;
+}
+*/
+
+.div {
+  margin-top: 20px;
+}
+
+.ui-loader {
+  display: none!important;
+}

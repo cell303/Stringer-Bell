@@ -25,7 +25,7 @@ define([
     # initializes the jQuery Mobile widgets and 
     # adjusts the size.
     render: =>
-      @$el.html(@template(@model.toJSON())).trigger('create')
+      @$el.html(@template(@model.toJSON()))
       @$('#slider-0, #slider-1').slider(theme: 'a', mini:true, highlight: true)
 
     # Binds methods to events that occur within this view.
@@ -52,15 +52,13 @@ define([
     # Asks the user to allow desktop notifications.
     allowNotifications: =>
       window.webkitNotifications.requestPermission()
-    #
+
     stopClock: =>
       @model.stopClock()
 
-    #
     resetToWorktime: =>
       @model.resetToWorktime()
 
-    #
     resetToFreetime: =>
       @model.resetToFreetime()
 

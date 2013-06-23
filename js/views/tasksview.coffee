@@ -6,16 +6,18 @@ define([
   'jquery'
   'underscore'
   'backbone'
+  'views/taskview'
   'text!templates/tasks.html'
-], ($, _, Backbone, tasksTemplate) ->
+], ($, _, Backbone, TaskView, tasksTemplate) ->
 
-  # This view represents the settings and sets them on the model
-  # Therefore, it is more of a controller than a view
   class TasksView extends Backbone.View
     
     # Binds methods and renders the content.
     initialize: ->
       @render()
+      @model.bind('change:workTime', @render)
+      @model.bind('change:isBreak', @render)
+      @model.tasks.bind('add', @render)
 
     # The pre-compiled underscore template for the settings.
     template: _.template(tasksTemplate)
@@ -24,7 +26,10 @@ define([
     # initializes the jQuery Mobile widgets and 
     # adjusts the size.
     render: =>
-      @$el.html(@template(@model.toJSON())).trigger('create')
+      @$el.html(@template(@model.toJSON()))
+      @model.tasks.each (task) =>
+        view = new TaskView model: task
+        @$el.find("#timeline").append(view.render().el)
 
   return TasksView
 )
