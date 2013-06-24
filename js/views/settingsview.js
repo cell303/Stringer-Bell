@@ -14,8 +14,7 @@
         this.allowNotifications = __bind(this.allowNotifications, this);
         this.setFreeTime = __bind(this.setFreeTime, this);
         this.setWorkTime = __bind(this.setWorkTime, this);
-        this.toggleSoundB = __bind(this.toggleSoundB, this);
-        this.toggleSoundA = __bind(this.toggleSoundA, this);
+        this.toggleSound = __bind(this.toggleSound, this);
         this.render = __bind(this.render, this);
         _ref = SettingsView.__super__.constructor.apply(this, arguments);
         return _ref;
@@ -45,20 +44,13 @@
           'click #stop': this.stopClock,
           'click #prev': this.prev,
           'click #next': this.next,
-          'change #flip-a': this.toggleSoundA,
-          'change #flip-b': this.toggleSoundB
+          'change #flip-a': this.toggleSound
         };
       };
 
-      SettingsView.prototype.toggleSoundA = function(event) {
+      SettingsView.prototype.toggleSound = function(event) {
         return this.model.set({
           'sound': !this.model.get('sound')
-        });
-      };
-
-      SettingsView.prototype.toggleSoundB = function(event) {
-        return this.model.set({
-          'soundBreak': !this.model.get('soundBreak')
         });
       };
 

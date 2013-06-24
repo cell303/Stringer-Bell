@@ -15,6 +15,7 @@
 
       TaskModel.prototype.defaults = function() {
         return {
+          isBreak: null,
           date: null,
           startDate: null,
           text: '',

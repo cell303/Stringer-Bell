@@ -36,14 +36,10 @@ define([
       'click #stop': @stopClock
       'click #prev': @prev
       'click #next': @next
-      'change #flip-a': @toggleSoundA
-      'change #flip-b': @toggleSoundB
+      'change #flip-a': @toggleSound
 
-    toggleSoundA: (event) =>
+    toggleSound: (event) =>
       @model.set('sound': !@model.get('sound'))
-
-    toggleSoundB: (event) =>
-      @model.set('soundBreak': !@model.get('soundBreak'))
 
     # Passes the new value to the model.
     setWorkTime: =>

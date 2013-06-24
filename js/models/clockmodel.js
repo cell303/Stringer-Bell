@@ -33,8 +33,7 @@
         workTime: 18,
         freeTime: 2,
         isBreak: false,
-        sound: true,
-        soundBreak: true
+        sound: true
       };
 
       ClockModel.prototype.initialize = function() {
@@ -103,25 +102,21 @@
           if (window.webkitNotifications.checkPermission() === 0) {
             if (this.get('isBreak')) {
               notification = window.webkitNotifications.createNotification('/images/icon128.png', 'Your break is over!', '');
-              if (this.get('soundBreak') && (this.canPlayMp3 || this.canPlayOgg)) {
-                document.getElementById('bell').load();
-                document.getElementById('bell').play();
-              }
             } else {
               notification = window.webkitNotifications.createNotification('/images/icon128.png', 'Time to take a break!', '');
-              if (this.get('sound') && (this.canPlayMp3 || this.canPlayOgg)) {
-                document.getElementById('bell').load();
-                document.getElementById('bell').play();
-              }
-              task = new TaskModel({
-                isBreak: this.get('isBreak'),
-                startDate: this.startDate,
-                date: new Date().getTime(),
-                edit: true
-              });
-              task.save();
-              this.tasks.add(task);
             }
+            if (this.get('sound') && (this.canPlayMp3 || this.canPlayOgg)) {
+              document.getElementById('bell').load();
+              document.getElementById('bell').play();
+            }
+            task = new TaskModel({
+              isBreak: this.get('isBreak'),
+              startDate: this.startDate,
+              date: new Date().getTime(),
+              edit: !this.get('isBreak')
+            });
+            task.save();
+            this.tasks.add(task);
             this.startDate = new Date().getTime();
             notification.show();
             return setTimeout(function() {

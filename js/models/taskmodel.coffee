@@ -13,6 +13,7 @@ define([
 
     # These default values should match those in the template.
     defaults: ->
+      isBreak: null
       date: null
       startDate: null
       text: ''

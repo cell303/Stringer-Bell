@@ -29,7 +29,6 @@ define([
       freeTime: 2
       isBreak: false
       sound: true
-      soundBreak: true
 
     # Sets initial values and starts the interval.
     initialize: =>
@@ -95,25 +94,24 @@ define([
     notifyUser: =>
       if @canShowNotifications
         if window.webkitNotifications.checkPermission() is 0
+
           if @get('isBreak')
             notification = window.webkitNotifications.createNotification '/images/icon128.png', 'Your break is over!', ''
-            if @get('soundBreak') and (@canPlayMp3 or @canPlayOgg)
-              document.getElementById('bell').load()
-              document.getElementById('bell').play()
           else
             notification = window.webkitNotifications.createNotification '/images/icon128.png', 'Time to take a break!', ''
-            if @get('sound') and (@canPlayMp3 or @canPlayOgg)
-              document.getElementById('bell').load()
-              document.getElementById('bell').play()
 
-            task = new TaskModel 
-              isBreak: @get('isBreak') 
-              startDate: @startDate
-              date: new Date().getTime()
-              edit: true
+          if @get('sound') and (@canPlayMp3 or @canPlayOgg)
+            document.getElementById('bell').load()
+            document.getElementById('bell').play()
 
-            task.save()
-            @tasks.add task
+          task = new TaskModel 
+            isBreak: @get('isBreak') 
+            startDate: @startDate
+            date: new Date().getTime()
+            edit: !@get('isBreak')
+
+          task.save()
+          @tasks.add task
 
           @startDate = new Date().getTime()
 
