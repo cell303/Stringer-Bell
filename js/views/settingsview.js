@@ -14,7 +14,8 @@
         this.allowNotifications = __bind(this.allowNotifications, this);
         this.setFreeTime = __bind(this.setFreeTime, this);
         this.setWorkTime = __bind(this.setWorkTime, this);
-        this.toggleSound = __bind(this.toggleSound, this);
+        this.toggleSoundB = __bind(this.toggleSoundB, this);
+        this.toggleSoundA = __bind(this.toggleSoundA, this);
         this.render = __bind(this.render, this);
         _ref = SettingsView.__super__.constructor.apply(this, arguments);
         return _ref;
@@ -44,22 +45,36 @@
           'click #stop': this.stopClock,
           'click #prev': this.prev,
           'click #next': this.next,
-          'change #flip-a': this.toggleSound
+          'change #flip-a': this.toggleSoundA,
+          'change #flip-b': this.toggleSoundB
         };
       };
 
-      SettingsView.prototype.toggleSound = function(event) {
+      SettingsView.prototype.toggleSoundA = function(event) {
         return this.model.set({
           'sound': !this.model.get('sound')
         });
       };
 
+      SettingsView.prototype.toggleSoundB = function(event) {
+        return this.model.set({
+          'soundBreak': !this.model.get('soundBreak')
+        });
+      };
+
       SettingsView.prototype.setWorkTime = function() {
-        return this.model.setWorkTime(parseInt($('#slider-0').val()));
+        var val;
+        console.log(this.$el.find('.work-time'));
+        val = parseInt($('#slider-0').val());
+        this.$el.find('.work-time').text(val);
+        return this.model.setWorkTime(val);
       };
 
       SettingsView.prototype.setFreeTime = function() {
-        return this.model.setFreeTime(parseInt($('#slider-1').val()));
+        var val;
+        val = parseInt($('#slider-1').val());
+        this.$el.find('.free-time').text(val);
+        return this.model.setFreeTime(val);
       };
 
       SettingsView.prototype.allowNotifications = function() {

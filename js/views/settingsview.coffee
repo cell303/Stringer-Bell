@@ -36,18 +36,27 @@ define([
       'click #stop': @stopClock
       'click #prev': @prev
       'click #next': @next
-      'change #flip-a': @toggleSound
+      'change #flip-a': @toggleSoundA
+      'change #flip-b': @toggleSoundB
 
-    toggleSound: (event) =>
+    toggleSoundA: (event) =>
       @model.set('sound': !@model.get('sound'))
+
+    toggleSoundB: (event) =>
+      @model.set('soundBreak': !@model.get('soundBreak'))
 
     # Passes the new value to the model.
     setWorkTime: =>
-      @model.setWorkTime(parseInt($('#slider-0').val()))
+      console.log @$el.find('.work-time')
+      val = parseInt($('#slider-0').val())
+      @$el.find('.work-time').text(val)
+      @model.setWorkTime(val)
 
     # Passes the new value to the model.
     setFreeTime: =>
-      @model.setFreeTime(parseInt($('#slider-1').val()))
+      val = parseInt($('#slider-1').val())
+      @$el.find('.free-time').text(val)
+      @model.setFreeTime(val)
 
     # Asks the user to allow desktop notifications.
     allowNotifications: =>

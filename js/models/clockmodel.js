@@ -33,7 +33,8 @@
         workTime: 18,
         freeTime: 2,
         isBreak: false,
-        sound: true
+        sound: true,
+        soundBreak: true
       };
 
       ClockModel.prototype.initialize = function() {
@@ -103,8 +104,16 @@
           if (window.webkitNotifications.checkPermission() === 0) {
             if (this.get('isBreak')) {
               notification = window.webkitNotifications.createNotification('/images/icon128.png', 'Your break is over!', '');
+              if (this.get('soundBreak') && (this.canPlayMp3 || this.canPlayOgg)) {
+                document.getElementById('bell').load();
+                document.getElementById('bell').play();
+              }
             } else {
               notification = window.webkitNotifications.createNotification('/images/icon128.png', 'Time to take a break!', '');
+              if (this.get('sound') && (this.canPlayMp3 || this.canPlayOgg)) {
+                document.getElementById('bell').load();
+                document.getElementById('bell').play();
+              }
               task = new TaskModel({
                 isBreak: this.get('isBreak'),
                 startDate: this.startDate,
@@ -116,15 +125,9 @@
             }
             this.startDate = new Date().getTime();
             notification.show();
-            setTimeout(function() {
+            return setTimeout(function() {
               return notification.cancel();
             }, 10000);
-          }
-        }
-        if (!this.get('isBreak') && this.get('sound')) {
-          if (this.canPlayMp3 || this.canPlayOgg) {
-            document.getElementById('bell').load();
-            return document.getElementById('bell').play();
           }
         }
       };

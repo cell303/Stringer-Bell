@@ -1,4 +1,3 @@
-<h2>Settings</h2>
 <form>
     <div class="play-bar" data-role="fieldcontain">
       <button id="prev" type="button" class="btn" title="Prev"><i class="mfg-step_backward"/></button>
@@ -7,13 +6,13 @@
     </div>
 
     <div class="task">
-      <label for="slider-0">Work time</label>
+      <label for="slider-0">Work time (<span class="work-time"><%= workTime %></span>)</label>
       <input type="range" name="slider" id="slider-0" value="<%= workTime %>" min="1" max="50" step="1" data-mini="true" data-highlight="true"/>
       <p class="help-block">How long can you concentrate before you have to take a break?</p>
     </div>
 
     <div class="task">
-      <label for="slider-1">Free time</label>
+      <label for="slider-1">Free time (<span class="free-time"><%= freeTime %></span>)</label>
       <input type="range" name="slider" id="slider-1" value="<%= freeTime %>" min="1" max="10" step="1" data-mini="true" data-highlight="true"/>
       <p class="help-block">How long are your breaks going to be?</p>
     </div>
@@ -22,7 +21,12 @@
       <label for="flip-a">Sound</label>
       <div class="checkbox">
         <label>
-          <input id="flip-a" type="checkbox" checked="<%= sound %>"> Play sound
+          <input id="flip-a" type="checkbox" checked="<%= sound %>"> Play sound on break
+        </label>
+      </div>
+      <div class="checkbox">
+        <label>
+          <input id="flip-b" type="checkbox" checked="<%= sound %>"> Play sound on break end
         </label>
       </div>
       <p class="help-block">If your Browser supports HTML5 audio you can let Stringer Bell play a sound when it's time to take a break</p>
