@@ -37,8 +37,6 @@ define([
       @startClock()
       @checkSupport()
 
-      @startDate = new Date().getTime()
-
       @tasks = new TasksCollection
       @tasks.fetch()
       @tasks.sort()
@@ -179,6 +177,7 @@ define([
 
     # Start the clock by assigning default values and then setting the interval.
     startClock: =>
+      @startDate = new Date().getTime()
       @sec = @min = @hour = 0
       currentDate = new Date()
 

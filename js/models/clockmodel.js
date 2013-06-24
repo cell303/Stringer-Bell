@@ -41,7 +41,6 @@
         this.fetch();
         this.startClock();
         this.checkSupport();
-        this.startDate = new Date().getTime();
         this.tasks = new TasksCollection;
         this.tasks.fetch();
         return this.tasks.sort();
@@ -187,6 +186,7 @@
 
       ClockModel.prototype.startClock = function() {
         var currentDate;
+        this.startDate = new Date().getTime();
         this.sec = this.min = this.hour = 0;
         currentDate = new Date();
         this.set({
