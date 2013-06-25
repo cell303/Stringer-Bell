@@ -13,15 +13,15 @@
         return _ref;
       }
 
-      TasksCollection.prototype.model = TaskModel;
+      TasksCollection.prototype.url = '/task';
 
-      TasksCollection.prototype.url = '/tasks';
+      TasksCollection.prototype.model = TaskModel;
 
       TasksCollection.prototype.comparator = function(task) {
         return -task.get('date');
       };
 
-      TasksCollection.prototype.localStorage = new Store('clock');
+      TasksCollection.prototype.localStorage = new Store('task');
 
       TasksCollection.prototype.sync = sync;
 

@@ -35,14 +35,13 @@
   });
 
   require(['jquery', 'models/clockmodel', 'views/clockview', 'views/settingsview', 'views/tasksview'], function($, ClockModel, ClockView, SettingsView, TasksView) {
-    var clockModel;
-    clockModel = new ClockModel({
-      id: 'clock'
-    });
-    return $('.ui-page').live('pageshow', function(event, ui) {
-      var clockView, settingsView, tasksView;
+    return $(document).ready(function() {
+      var clockModel, clockView, settingsView, tasksView;
+      clockModel = new ClockModel({
+        id: 'clock'
+      });
       clockView = new ClockView({
-        el: $(event.target).find('#clock'),
+        el: $('#clock'),
         model: clockModel,
         scale: .8,
         sync: true

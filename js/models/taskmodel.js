@@ -13,6 +13,8 @@
         return _ref;
       }
 
+      TaskModel.prototype.url = '/task';
+
       TaskModel.prototype.defaults = function() {
         return {
           isBreak: null,
@@ -29,7 +31,7 @@
         }
       };
 
-      TaskModel.prototype.localStorage = new Store('clock');
+      TaskModel.prototype.localStorage = new Store('task');
 
       TaskModel.prototype.sync = sync;
 

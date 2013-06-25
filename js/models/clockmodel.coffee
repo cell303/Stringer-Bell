@@ -206,7 +206,7 @@ define [
     tweet: (text) ->
       console.log 'empty'
 
-    localStorage: new Store('clock')
+    localStorage: new Store 'clock'
 
     sync: sync
   

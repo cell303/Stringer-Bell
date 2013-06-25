@@ -1,8 +1,4 @@
-# @fileOverview A simple alarm clock (bell) that tells you when it's time to take a break.
-# @author <a href="https://www.twitter.com/cell303">@cell303</a>
-# @version 1
-
-define([
+define [
   'jquery'
   'jquerymobile'
   'underscore'
@@ -251,4 +247,3 @@ define([
       )
 
   return ClockView
-)

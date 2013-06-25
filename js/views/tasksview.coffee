@@ -1,8 +1,4 @@
-# @fileOverview A simple alarm clock (bell) that tells you when it's time to take a break.
-# @author <a href="https://www.twitter.com/cell303">@cell303</a>
-# @version 1
-
-define([
+define [
   'jquery'
   'underscore'
   'backbone'
@@ -15,9 +11,9 @@ define([
     # Binds methods and renders the content.
     initialize: ->
       @render()
-      @model.bind('change:workTime', @render)
-      @model.bind('change:isBreak', @render)
-      @model.tasks.bind('add', @render)
+      #@model.bind 'change:workTime', @render
+      #@model.bind 'change:isBreak', @render
+      @model.tasks.bind 'add', @add
 
     # The pre-compiled underscore template for the settings.
     template: _.template(tasksTemplate)
@@ -31,5 +27,8 @@ define([
         view = new TaskView model: task
         @$el.find("#timeline").append(view.render().el)
 
+    add: (task) =>
+      view = new TaskView model: task
+      @$el.find("#timeline").prepend(view.render().el)
+
   return TasksView
-)

@@ -10,6 +10,7 @@
       __extends(TasksView, _super);
 
       function TasksView() {
+        this.add = __bind(this.add, this);
         this.render = __bind(this.render, this);
         _ref = TasksView.__super__.constructor.apply(this, arguments);
         return _ref;
@@ -17,9 +18,7 @@
 
       TasksView.prototype.initialize = function() {
         this.render();
-        this.model.bind('change:workTime', this.render);
-        this.model.bind('change:isBreak', this.render);
-        return this.model.tasks.bind('add', this.render);
+        return this.model.tasks.bind('add', this.add);
       };
 
       TasksView.prototype.template = _.template(tasksTemplate);
@@ -34,6 +33,14 @@
           });
           return _this.$el.find("#timeline").append(view.render().el);
         });
+      };
+
+      TasksView.prototype.add = function(task) {
+        var view;
+        view = new TaskView({
+          model: task
+        });
+        return this.$el.find("#timeline").prepend(view.render().el);
       };
 
       return TasksView;

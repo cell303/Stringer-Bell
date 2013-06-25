@@ -1,9 +1,6 @@
-# @fileOverview A simple alarm clock (bell) that tells you when it's time to take a break.
-# @author <a href="https://www.twitter.com/cell303">@cell303</a>
-# @version 1
-
 # The function that Backbone calls every time it attempts to read or save a model 
 # to the server. Has been altered for this model to save to localStorage instead.
+#
 # @param {string} method The CRUD method.
 # @param {Backbone.Model} model The model to be saved. Always this model.
 # @param {Object=} options jQuery.ajax request options
@@ -43,11 +40,10 @@ require [
   'views/tasksview'
 ], ($, ClockModel, ClockView, SettingsView, TasksView) ->
 
-  clockModel = new ClockModel(id: 'clock')
-
-  $('.ui-page').live 'pageshow', (event, ui) ->
+  $(document).ready ->
+    clockModel = new ClockModel id: 'clock'
     clockView = new ClockView
-      el: $(event.target).find('#clock')
+      el: $('#clock')
       model: clockModel
       scale: .8
       sync: true
