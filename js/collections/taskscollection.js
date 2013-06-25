@@ -3,7 +3,7 @@
   var __hasProp = {}.hasOwnProperty,
     __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
-  define(['underscore', 'backbone', 'models/taskmodel', 'libs/backbone.localstorage'], function(_, Backbone, TaskModel, Store) {
+  define(['underscore', 'backbone', 'models/taskmodel', 'localstorage'], function(_, Backbone, TaskModel) {
     var TasksCollection, _ref;
     TasksCollection = (function(_super) {
       __extends(TasksCollection, _super);
@@ -21,9 +21,7 @@
         return -task.get('date');
       };
 
-      TasksCollection.prototype.localStorage = new Store('task');
-
-      TasksCollection.prototype.sync = sync;
+      TasksCollection.prototype.localStorage = new Backbone.LocalStorage('task');
 
       return TasksCollection;
 

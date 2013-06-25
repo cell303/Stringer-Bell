@@ -8,8 +8,8 @@ define [
   'backbone'
   'collections/taskscollection'
   'models/taskmodel'
-  'libs/backbone.localstorage'
-], (_, Backbone, TasksCollection, TaskModel, Store) ->
+  'localstorage'
+], (_, Backbone, TasksCollection, TaskModel) ->
 
   # Implements the logic of a stop watch.
   class ClockModel extends Backbone.Model
@@ -206,8 +206,6 @@ define [
     tweet: (text) ->
       console.log 'empty'
 
-    localStorage: new Store 'clock'
-
-    sync: sync
+    localStorage: new Backbone.LocalStorage 'clock'
   
   return ClockModel

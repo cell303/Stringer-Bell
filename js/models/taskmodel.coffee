@@ -1,8 +1,8 @@
 define [
   'underscore'
   'backbone'
-  'libs/backbone.localstorage'
-], (_, Backbone, Store) ->
+  'localstorage'
+], (_, Backbone) ->
 
   class TaskModel extends Backbone.Model
     url: '/task'
@@ -18,8 +18,6 @@ define [
       if attrs.text.length > 140
         return "can't end before it starts"
 
-    localStorage: new Store 'task'
-
-    sync: sync
+    localStorage: new Backbone.LocalStorage 'task'
   
   return TaskModel

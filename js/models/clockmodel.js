@@ -4,7 +4,7 @@
     __hasProp = {}.hasOwnProperty,
     __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
-  define(['underscore', 'backbone', 'collections/taskscollection', 'models/taskmodel', 'libs/backbone.localstorage'], function(_, Backbone, TasksCollection, TaskModel, Store) {
+  define(['underscore', 'backbone', 'collections/taskscollection', 'models/taskmodel', 'localstorage'], function(_, Backbone, TasksCollection, TaskModel) {
     var ClockModel, _ref;
     ClockModel = (function(_super) {
       __extends(ClockModel, _super);
@@ -218,9 +218,7 @@
         return console.log('empty');
       };
 
-      ClockModel.prototype.localStorage = new Store('clock');
-
-      ClockModel.prototype.sync = sync;
+      ClockModel.prototype.localStorage = new Backbone.LocalStorage('clock');
 
       return ClockModel;
 

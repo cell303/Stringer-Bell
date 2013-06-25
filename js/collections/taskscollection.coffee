@@ -2,19 +2,16 @@ define [
   'underscore'
   'backbone'
   'models/taskmodel'
-  'libs/backbone.localstorage'
-], (_, Backbone, TaskModel, Store) ->
+  'localstorage'
+], (_, Backbone, TaskModel) ->
 
   class TasksCollection extends Backbone.Collection
     url: '/task'
 
     model: TaskModel
 
-    comparator: (task) ->
-      return -task.get('date')
+    comparator: (task) -> -task.get 'date'
 
-    localStorage: new Store 'task'
-
-    sync: sync
+    localStorage: new Backbone.LocalStorage 'task'
 
   return TasksCollection
