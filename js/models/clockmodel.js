@@ -220,26 +220,7 @@
 
       ClockModel.prototype.localStorage = new Store('clock');
 
-      ClockModel.prototype.sync = function(method, model, options) {
-        var resp, store;
-        store = this.localStorage;
-        switch (method) {
-          case 'create':
-            resp = store.create(model);
-            break;
-          case 'read':
-            resp = model.id != null ? store.find(model) : store.findAll();
-            break;
-          case 'update':
-            resp = store.update(model);
-            break;
-          case 'delete':
-            resp = store.destroy(model);
-        }
-        if (resp) {
-          return options.success(resp);
-        }
-      };
+      ClockModel.prototype.sync = sync;
 
       return ClockModel;
 

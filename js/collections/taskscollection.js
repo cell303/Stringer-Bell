@@ -23,27 +23,7 @@
 
       TasksCollection.prototype.localStorage = new Store('clock');
 
-      TasksCollection.prototype.sync = function(method, model, options) {
-        var resp, store;
-        console.log(method, model, options);
-        store = this.localStorage;
-        switch (method) {
-          case 'create':
-            resp = store.create(model);
-            break;
-          case 'read':
-            resp = model.id != null ? store.find(model) : store.findAll();
-            break;
-          case 'update':
-            resp = store.update(model);
-            break;
-          case 'delete':
-            resp = store.destroy(model);
-        }
-        if (resp) {
-          return options.success(resp);
-        }
-      };
+      TasksCollection.prototype.sync = sync;
 
       return TasksCollection;
 

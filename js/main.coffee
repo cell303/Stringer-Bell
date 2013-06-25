@@ -2,6 +2,29 @@
 # @author <a href="https://www.twitter.com/cell303">@cell303</a>
 # @version 1
 
+# The function that Backbone calls every time it attempts to read or save a model 
+# to the server. Has been altered for this model to save to localStorage instead.
+# @param {string} method The CRUD method.
+# @param {Backbone.Model} model The model to be saved. Always this model.
+# @param {Object=} options jQuery.ajax request options
+this.sync = (method, model, options) ->
+  console.log "central", method, model, options
+
+  store = model.localStorage
+  
+  switch (method)
+    when 'create'
+      resp = store.create(model)
+    when 'read'
+      resp = if model.id? then store.find(model) else store.findAll()
+    when 'update'
+      resp = store.update(model)
+    when 'delete'
+      resp = store.destroy(model)
+
+  if (resp)
+    options.success(resp)
+
 require.config
   paths:
     jquery: 'http://code.jquery.com/jquery-1.7.1.min'
