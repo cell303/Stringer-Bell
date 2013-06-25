@@ -28,12 +28,7 @@
       SettingsView.prototype.template = _.template(settingsTemplate);
 
       SettingsView.prototype.render = function() {
-        this.$el.html(this.template(this.model.toJSON()));
-        return this.$('#slider-0, #slider-1').slider({
-          theme: 'a',
-          mini: true,
-          highlight: true
-        });
+        return this.$el.html(this.template(this.model.toJSON()));
       };
 
       SettingsView.prototype.events = function() {

@@ -4,7 +4,7 @@
     __hasProp = {}.hasOwnProperty,
     __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
-  define(['jquery', 'jquerymobile', 'underscore', 'backbone', 'misc/angle', 'text!templates/clock.html'], function($, $mobile, _, Backbone, Angle, clockTemplate) {
+  define(['jquery', 'underscore', 'backbone', 'misc/angle', 'text!templates/clock.html'], function($, _, Backbone, Angle, clockTemplate) {
     var ClockView;
     ClockView = (function(_super) {
       __extends(ClockView, _super);

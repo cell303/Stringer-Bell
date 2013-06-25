@@ -22,7 +22,6 @@ define [
     # adjusts the size.
     render: =>
       @$el.html(@template(@model.toJSON()))
-      @$('#slider-0, #slider-1').slider(theme: 'a', mini:true, highlight: true)
 
     # Binds methods to events that occur within this view.
     events: ->

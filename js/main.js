@@ -25,7 +25,6 @@
   require.config({
     paths: {
       jquery: 'http://code.jquery.com/jquery-1.7.1.min',
-      jquerymobile: 'http://code.jquery.com/mobile/1.1.0-rc.1/jquery.mobile-1.1.0-rc.1.min',
       underscore: 'libs/underscore-min',
       backbone: 'libs/backbone-min',
       order: 'libs/order',

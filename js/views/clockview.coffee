@@ -1,11 +1,10 @@
 define [
   'jquery'
-  'jquerymobile'
   'underscore'
   'backbone'
   'misc/angle'
   'text!templates/clock.html'
-], ($, $mobile, _, Backbone, Angle, clockTemplate) ->
+], ($, _, Backbone, Angle, clockTemplate) ->
 
   # A visual representation of the clock. 
   # This class includes a lot of calculation, but since it's got nothing to do with the 
