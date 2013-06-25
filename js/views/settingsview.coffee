@@ -38,7 +38,6 @@ define [
 
     # Passes the new value to the model.
     setWorkTime: =>
-      console.log @$el.find('.work-time')
       val = parseInt($('#slider-0').val())
       @$el.find('.work-time').text(val)
       @model.setWorkTime(val)

@@ -17,6 +17,8 @@ define [
 
     # The pre-compiled underscore template for the settings.
     template: _.template(template)
+
+    regexp: new RegExp("#([\\w]*)", "g")
     
     # Binds methods and renders the content.
     initialize: ->
@@ -31,7 +33,13 @@ define [
     render: =>
       diff = @model.get('date') - @model.get('startDate')
       diff = Math.round(diff / 60000)
+
+      text = @model.get "text"
+      text = _.escape text
+      text = text.replace @regexp, '<a class="tag" href="#/tagged/$1" data-tag="$1">#$1</a>'
+
       json = _.extend @model.toJSON(),
+        text: text
         time: diff
         date: moment(@model.get("date")).format("LLLL")
 
@@ -41,8 +49,16 @@ define [
       this
 
     tweet: ->
-      @model.save 'text', @input.val()
-      @model.save 'edit', false
+      text = @input.val()
+      tags = []
+
+      while (myArray = @regexp.exec(text)) isnt null
+        tags.push myArray[1]
+
+      console.log tags
+
+      @model.save 'text', text
+      @model.save 'tags', tags
 
     update140: (e) =>
       @$el.find('.chars').text(140 - @input.val().length)

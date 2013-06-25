@@ -35,7 +35,8 @@
         workTime: 18,
         freeTime: 2,
         isBreak: false,
-        sound: true
+        sound: true,
+        tag: null
       };
 
       ClockModel.prototype.initialize = function() {

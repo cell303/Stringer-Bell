@@ -31,6 +31,7 @@ define [
       freeTime: 2
       isBreak: false
       sound: true
+      tag: null
 
     # Sets initial values and starts the interval.
     initialize: =>

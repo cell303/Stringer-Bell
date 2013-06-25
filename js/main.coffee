@@ -17,14 +17,36 @@ require.config
 
 require [
   'jquery'
+  'backbone'
   'models/clockmodel'
   'views/clockview'
   'views/settingsview'
   'views/tasksview'
-], ($, ClockModel, ClockView, SettingsView, TasksView) ->
+], ($, Backbone, ClockModel, ClockView, SettingsView, TasksView) ->
+
+  class Router extends Backbone.Router
+    constructor: (model, args) ->
+      super args
+      @model = model
+
+    routes:
+      '': 'home'
+      'tagged/:tag': 'tag'
+
+    home: ->
+      console.log 'home'
+      @model.set 'tag', null
+
+    tag: (tag) ->
+      console.log 'tag'
+      @model.set 'tag', tag
 
   $(document).ready ->
     clockModel = new ClockModel id: 'clock'
+    window.router = new Router(clockModel)
+    Backbone.history.start()# pushState: true
+
+
     clockView = new ClockView
       el: $('#clock')
       model: clockModel

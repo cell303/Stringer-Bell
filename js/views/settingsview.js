@@ -51,7 +51,6 @@
 
       SettingsView.prototype.setWorkTime = function() {
         var val;
-        console.log(this.$el.find('.work-time'));
         val = parseInt($('#slider-0').val());
         this.$el.find('.work-time').text(val);
         return this.model.setWorkTime(val);

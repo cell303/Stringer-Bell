@@ -23,6 +23,8 @@
 
       TaskView.prototype.template = _.template(template);
 
+      TaskView.prototype.regexp = new RegExp("#([\\w]*)", "g");
+
       TaskView.prototype.initialize = function() {
         this.model.on('change', this.render);
         return this.render();
@@ -42,10 +44,14 @@
       };
 
       TaskView.prototype.render = function() {
-        var diff, json;
+        var diff, json, text;
         diff = this.model.get('date') - this.model.get('startDate');
         diff = Math.round(diff / 60000);
+        text = this.model.get("text");
+        text = _.escape(text);
+        text = text.replace(this.regexp, '<a class="tag" href="#/tagged/$1" data-tag="$1">#$1</a>');
         json = _.extend(this.model.toJSON(), {
+          text: text,
           time: diff,
           date: moment(this.model.get("date")).format("LLLL")
         });
@@ -56,8 +62,15 @@
       };
 
       TaskView.prototype.tweet = function() {
-        this.model.save('text', this.input.val());
-        return this.model.save('edit', false);
+        var myArray, tags, text;
+        text = this.input.val();
+        tags = [];
+        while ((myArray = this.regexp.exec(text)) !== null) {
+          tags.push(myArray[1]);
+        }
+        console.log(tags);
+        this.model.save('text', text);
+        return this.model.save('tags', tags);
       };
 
       TaskView.prototype.update140 = function(e) {

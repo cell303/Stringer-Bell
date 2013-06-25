@@ -18,20 +18,37 @@
 
       TasksView.prototype.initialize = function() {
         this.render();
-        return this.model.tasks.bind('add', this.add);
+        this.model.on('change:tag', this.render);
+        return this.model.tasks.on('add', this.add);
       };
 
       TasksView.prototype.template = _.template(tasksTemplate);
 
+      TasksView.prototype.sum = 0;
+
       TasksView.prototype.render = function() {
         var _this = this;
         this.$el.html(this.template(this.model.toJSON()));
+        this.sum = 0;
         return this.model.tasks.each(function(task) {
-          var view;
-          view = new TaskView({
-            model: task
-          });
-          return _this.$el.find("#timeline").append(view.render().el);
+          var tag, view;
+          if (_this.model.get("tag") != null) {
+            tag = _this.model.get("tag");
+            if ((task.attributes.tags != null) && _.contains(task.attributes.tags, tag)) {
+              _this.sum += task.get("time");
+              view = new TaskView({
+                model: task
+              });
+              _this.$el.find("#timeline").append(view.render().el);
+            }
+          } else {
+            _this.sum += task.get("time");
+            view = new TaskView({
+              model: task
+            });
+            _this.$el.find("#timeline").append(view.render().el);
+          }
+          return _this.$el.find("#sum").text(_this.sum);
         });
       };
 
@@ -40,7 +57,9 @@
         view = new TaskView({
           model: task
         });
-        return this.$el.find("#timeline").prepend(view.render().el);
+        this.$el.find("#timeline").prepend(view.render().el);
+        this.sum += task.get("time");
+        return this.$el.find("#sum").text(this.sum);
       };
 
       return TasksView;
