@@ -24,9 +24,8 @@ define [
       @render()
 
     events: =>
-      'click .save': @tweet
-      'click .edit': => @model.save 'edit', true
-      'click .cancel': => @model.save 'edit', false
+      'focus textarea': => @$el.addClass 'edit'
+      'blur textarea': => @$el.removeClass 'edit'
       'keyup textarea': @update140
 
     render: =>
@@ -45,7 +44,11 @@ define [
       @model.save 'text', @input.val()
       @model.save 'edit', false
 
-    update140: ->
-      @$el.find('.lead').text(140 - @input.val().length)
+    update140: (e) =>
+      @$el.find('.chars').text(140 - @input.val().length)
+
+      if e.keyCode is 13 and e.shiftKey isnt true
+        @tweet()
+        @$el.next().find('textarea').focus()
 
   return TaskView

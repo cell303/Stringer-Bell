@@ -3,7 +3,7 @@
 # @author <a href="https://www.twitter.com/cell303">@cell303</a>
 # @version 1
 
-define([
+define [
   'underscore'
   'backbone'
   'collections/taskscollection'
@@ -13,6 +13,8 @@ define([
 
   # Implements the logic of a stop watch.
   class ClockModel extends Backbone.Model
+
+    url: '/clock'
 
     # These default values should match those in the template.
     defaults:
@@ -104,22 +106,26 @@ define([
             document.getElementById('bell').load()
             document.getElementById('bell').play()
 
-          task = new TaskModel 
-            isBreak: @get('isBreak') 
-            startDate: @startDate
-            date: new Date().getTime()
-            edit: !@get('isBreak')
-
-          task.save()
-          @tasks.add task
-
-          @startDate = new Date().getTime()
+          @newTask()
 
           notification.show()
           setTimeout ->
             notification.cancel()
           , 10000
 
+    newTask: ->
+      date = new Date().getTime()
+      time = Math.round((date - @startDate)/60000)
+      task = new TaskModel 
+        isBreak: @get "isBreak"
+        startDate: @startDate
+        date: date
+        time: time
+
+      task.save()
+      @tasks.add task
+
+      @startDate = new Date().getTime()
 
     # Checks if the browser supports html5 stuff...
     checkSupport: ->
@@ -175,22 +181,21 @@ define([
 
     # Start the clock by assigning default values and then setting the interval.
     startClock: =>
-      @startDate = new Date().getTime()
-      @sec = @min = @hour = 0
       currentDate = new Date()
+      @startDate = currentDate.getTime()
+      @sec = @min = @hour = 0
 
-      @set(
-        'syncSecond': currentDate.getSeconds()
-        'syncMinute': currentDate.getMinutes()
-        'syncHour': currentDate.getHours() % 12
-        'unsyncSecond': @sec
-        'unsyncMinute': @min
-        'unsyncHour': @hour
-        'internalSecond': @sec
-        'internalMinute': @min
-        'internalHour': @hour
-        'isBreak': false
-      )
+      @set
+        syncSecond: currentDate.getSeconds()
+        syncMinute: currentDate.getMinutes()
+        syncHour: currentDate.getHours() % 12
+        unsyncSecond: @sec
+        unsyncMinute: @min
+        unsyncHour: @hour
+        internalSecond: @sec
+        internalMinute: @min
+        internalHour: @hour
+        isBreak: false
 
       @interval = setInterval(@updateClock, 1000)
 
@@ -199,6 +204,7 @@ define([
       if @interval? then clearInterval(@interval)
 
     tweet: (text) ->
+      console.log 'empty'
 
     # Wrapper for the localStorage.
     localStorage: new Store('clock')
@@ -226,4 +232,3 @@ define([
         options.success(resp)
   
   return ClockModel
-)

@@ -86,6 +86,7 @@
       };
 
       SettingsView.prototype.next = function() {
+        this.model.newTask();
         if (this.model.get("isBreak")) {
           return this.model.resetToWorktime();
         } else {

@@ -20,6 +20,8 @@
         return _ref;
       }
 
+      ClockModel.prototype.url = '/clock';
+
       ClockModel.prototype.defaults = {
         syncSecond: 0,
         syncMinute: 0,
@@ -97,7 +99,7 @@
       };
 
       ClockModel.prototype.notifyUser = function() {
-        var notification, task;
+        var notification;
         if (this.canShowNotifications) {
           if (window.webkitNotifications.checkPermission() === 0) {
             if (this.get('isBreak')) {
@@ -109,21 +111,28 @@
               document.getElementById('bell').load();
               document.getElementById('bell').play();
             }
-            task = new TaskModel({
-              isBreak: this.get('isBreak'),
-              startDate: this.startDate,
-              date: new Date().getTime(),
-              edit: !this.get('isBreak')
-            });
-            task.save();
-            this.tasks.add(task);
-            this.startDate = new Date().getTime();
+            this.newTask();
             notification.show();
             return setTimeout(function() {
               return notification.cancel();
             }, 10000);
           }
         }
+      };
+
+      ClockModel.prototype.newTask = function() {
+        var date, task, time;
+        date = new Date().getTime();
+        time = Math.round((date - this.startDate) / 60000);
+        task = new TaskModel({
+          isBreak: this.get("isBreak"),
+          startDate: this.startDate,
+          date: date,
+          time: time
+        });
+        task.save();
+        this.tasks.add(task);
+        return this.startDate = new Date().getTime();
       };
 
       ClockModel.prototype.checkSupport = function() {
@@ -181,20 +190,20 @@
 
       ClockModel.prototype.startClock = function() {
         var currentDate;
-        this.startDate = new Date().getTime();
-        this.sec = this.min = this.hour = 0;
         currentDate = new Date();
+        this.startDate = currentDate.getTime();
+        this.sec = this.min = this.hour = 0;
         this.set({
-          'syncSecond': currentDate.getSeconds(),
-          'syncMinute': currentDate.getMinutes(),
-          'syncHour': currentDate.getHours() % 12,
-          'unsyncSecond': this.sec,
-          'unsyncMinute': this.min,
-          'unsyncHour': this.hour,
-          'internalSecond': this.sec,
-          'internalMinute': this.min,
-          'internalHour': this.hour,
-          'isBreak': false
+          syncSecond: currentDate.getSeconds(),
+          syncMinute: currentDate.getMinutes(),
+          syncHour: currentDate.getHours() % 12,
+          unsyncSecond: this.sec,
+          unsyncMinute: this.min,
+          unsyncHour: this.hour,
+          internalSecond: this.sec,
+          internalMinute: this.min,
+          internalHour: this.hour,
+          isBreak: false
         });
         return this.interval = setInterval(this.updateClock, 1000);
       };
@@ -205,7 +214,9 @@
         }
       };
 
-      ClockModel.prototype.tweet = function(text) {};
+      ClockModel.prototype.tweet = function(text) {
+        return console.log('empty');
+      };
 
       ClockModel.prototype.localStorage = new Store('clock');
 

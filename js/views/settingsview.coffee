@@ -68,6 +68,8 @@ define([
         @model.resetToWorktime()
 
     next: ->
+      @model.newTask()
+
       if @model.get("isBreak")
         @model.resetToWorktime()
       else

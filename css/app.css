@@ -3,7 +3,7 @@
 }
 
 body {
-  padding: 0 25px;
+  padding: 10px 25px;
   background-color: #f0f0f0;
   font-family: Georgia;
 }
@@ -152,6 +152,7 @@ audio {
   height: 75px;
   border-radius: 100%;
   font-size: 2em;
+  color: rgb(68, 68, 68);
 }
 
 #stop {
@@ -315,30 +316,52 @@ audio {
 }
 
 .task {
-  margin-bottom: 1em;
-  padding-bottom: 1em;
+  margin-bottom: 15px;
+  padding-bottom: 10px;
   border-bottom: 1px solid #ccc;
+}
+
+#timeline .task .time {
+  color: #8ac3e9;
+}
+
+#timeline .task.break .time {
+  color: #6496b4;
+}
+
+.task p {
+  font-size: 100%;
+  line-height: 135%;
+}
+
+.task .edit-info {
+  display: none;
+}
+
+.task.edit .edit-info {
+  display: block;
 }
 
 .task textarea {
   width: 100%;
+  font-family: Georgia;
+  font-size: 100%;
+  line-height: 135%;
+
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  -o-box-sizing: border-box;
   box-sizing: border-box;
-}
 
-.task .lead {
-  margin-right: 5px;
-}
+  margin-top: 5px;
 
-
-/*
-#prev .ui-icon {
-  background-color: #8ac3e9;
+  //margin: 0;
+  //padding: 0;
+  //background: none;
+  //border: none;
+  //box-shadow: none;
 }
-
-#next .ui-icon {
-  background-color: #6496b4;
-}
-*/
 
 .ui-loader {
   display: none!important;

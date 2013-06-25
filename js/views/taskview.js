@@ -10,6 +10,7 @@
       __extends(TaskView, _super);
 
       function TaskView() {
+        this.update140 = __bind(this.update140, this);
         this.render = __bind(this.render, this);
         this.events = __bind(this.events, this);
         _ref = TaskView.__super__.constructor.apply(this, arguments);
@@ -30,12 +31,11 @@
       TaskView.prototype.events = function() {
         var _this = this;
         return {
-          'click .save': this.tweet,
-          'click .edit': function() {
-            return _this.model.save('edit', true);
+          'focus textarea': function() {
+            return _this.$el.addClass('edit');
           },
-          'click .cancel': function() {
-            return _this.model.save('edit', false);
+          'blur textarea': function() {
+            return _this.$el.removeClass('edit');
           },
           'keyup textarea': this.update140
         };
@@ -59,8 +59,12 @@
         return this.model.save('edit', false);
       };
 
-      TaskView.prototype.update140 = function() {
-        return this.$el.find('.lead').text(140 - this.input.val().length);
+      TaskView.prototype.update140 = function(e) {
+        this.$el.find('.chars').text(140 - this.input.val().length);
+        if (e.keyCode === 13 && e.shiftKey !== true) {
+          this.tweet();
+          return this.$el.next().find('textarea').focus();
+        }
       };
 
       return TaskView;
