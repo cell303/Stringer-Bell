@@ -17,6 +17,7 @@ define [
     # The pre-compiled underscore template for the settings.
     template: _.template(tasksTemplate)
     
+    #tags: []
     sum: 0
 
     #events: ->
@@ -28,6 +29,7 @@ define [
     render: =>
       @$el.html(@template(@model.toJSON()))
 
+      #@tags = []
       @sum = 0
       @model.tasks.each (task) =>
         if @model.get("tag")?
@@ -36,17 +38,36 @@ define [
             @sum += task.get "time"
             view = new TaskView model: task
             @$el.find("#timeline").append(view.render().el)
+
+            #_.each(task.get("tags"), (tag) => @tags.push(tag))
         else
             @sum += task.get "time"
             view = new TaskView model: task
             @$el.find("#timeline").append(view.render().el)
 
+            #_.each(task.get("tags"), (tag) => @tags.push(tag))
+
+        @setSum()
+
+    setSum: ->
+      if @sum > 60
+        hours = Math.floor(@sum/60)
+        minutes = @sum%60
+        @$el.find("#sum").text hours+'" '+minutes
+      else
         @$el.find("#sum").text @sum
 
     add: (task) =>
+      if @model.get("tag")? 
+        task.set("text", "#"+@model.get("tag"))
+        task.set("tags", [@model.get("tag")])
+
       view = new TaskView model: task
       @$el.find("#timeline").prepend(view.render().el)
       @sum += task.get "time"
-      @$el.find("#sum").text @sum
+      @setSum()
+      if $(':focus').length is 0 then view.$el.find('textarea').focus()
+
+      #_.each(task.get("tags"), (tag) => @tags.unshift(tag))
 
   return TasksView

@@ -34,11 +34,9 @@ require [
       'tagged/:tag': 'tag'
 
     home: ->
-      console.log 'home'
       @model.set 'tag', null
 
     tag: (tag) ->
-      console.log 'tag'
       @model.set 'tag', tag
 
   $(document).ready ->

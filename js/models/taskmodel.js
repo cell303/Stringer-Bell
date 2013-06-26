@@ -21,7 +21,8 @@
           date: null,
           startDate: null,
           text: '',
-          edit: false
+          saved: false,
+          tags: []
         };
       };
 

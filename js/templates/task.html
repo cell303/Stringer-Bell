@@ -1,11 +1,11 @@
-<p class="time">
+<p class="time muted">
   <i class="mfg-clock" title="Timestamp"/> <time><%= date %></time> 
   <span class="pull-right"><%= time %> <i class="mfg-stopwatch" title="Minutes"/></span>
 </p>
-<% if(text.length > 0) { %>
-  <p><%= text %></p>
+<% if(saved) { %>
+<p><%= displayText %></p>
 <% } else { %>
-  <textarea rows="2" placeholder="What have you been doing in these <%= time %> minutes?"/>
+  <textarea rows="2" placeholder="What have you been doing in these <%= time %> minutes?"><%= text %></textarea>
   <p class="edit-info muted">
     <em class="pull-right">Press enter to save</em>
     <span class="chars">140</span>

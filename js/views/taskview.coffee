@@ -26,26 +26,23 @@ define [
       @render()
 
     events: =>
+      'keypress textarea': @update140
+      'dblclick *': => @model.set 'saved', false
       'focus textarea': => @$el.addClass 'edit'
       'blur textarea': => @$el.removeClass 'edit'
-      'keyup textarea': @update140
 
     render: =>
-      diff = @model.get('date') - @model.get('startDate')
-      diff = Math.round(diff / 60000)
-
       text = @model.get "text"
-      text = _.escape text
       text = text.replace @regexp, '<a class="tag" href="#/tagged/$1" data-tag="$1">#$1</a>'
 
       json = _.extend @model.toJSON(),
-        text: text
-        time: diff
+        displayText: text
         date: moment(@model.get("date")).format("LLLL")
 
       @$el.html(@template(json))
       @$el.toggleClass 'break', @model.get('isBreak')
       @input = @$el.find('textarea')
+      @input.focus()
       this
 
     tweet: ->
@@ -55,10 +52,10 @@ define [
       while (myArray = @regexp.exec(text)) isnt null
         tags.push myArray[1]
 
-      console.log tags
-
-      @model.save 'text', text
-      @model.save 'tags', tags
+      @model.save 
+        text: text
+        tags: tags
+        saved: true
 
     update140: (e) =>
       @$el.find('.chars').text(140 - @input.val().length)

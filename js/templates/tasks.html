@@ -1,6 +1,16 @@
-<p class="time">
+<p id="menu" class="time">
   <a href="#/">Home</a>
-  <span class="pull-right"><span id="sum"></span> <i class="mfg-stopwatch" title="Minutes"/></span>
+  <% if(tag) { %>
+  <span> > </span><a class="tag" href="#/tagged/<%= tag %>" data-tag="<%= tag %>">#<%= tag %></a>
+  <% } %>
+  <span class="pull-right"><span id="sum">0</span> <i class="mfg-stopwatch" title="Minutes"/></span>
 </p>
+<!--<a href='/login'>Login via Twitter</a>-->
+<!--<form>
+  <label for="from">From</label>
+  <input type="date" name="from">
+  <label for="to">To</label>
+  <input type="date" name="to">
+</form>-->
 <div class="clearfix"/>
 <ul id="timeline"></ul>

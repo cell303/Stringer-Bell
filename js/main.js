@@ -40,12 +40,10 @@
       };
 
       Router.prototype.home = function() {
-        console.log('home');
         return this.model.set('tag', null);
       };
 
       Router.prototype.tag = function(tag) {
-        console.log('tag');
         return this.model.set('tag', tag);
       };
 

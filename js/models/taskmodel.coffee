@@ -12,7 +12,8 @@ define [
       date: null
       startDate: null
       text: ''
-      edit: false
+      saved: false
+      tags: []
 
     validate: (attrs, options) ->
       if attrs.text.length > 140

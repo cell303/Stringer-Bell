@@ -33,31 +33,31 @@
       TaskView.prototype.events = function() {
         var _this = this;
         return {
+          'keypress textarea': this.update140,
+          'dblclick *': function() {
+            return _this.model.set('saved', false);
+          },
           'focus textarea': function() {
             return _this.$el.addClass('edit');
           },
           'blur textarea': function() {
             return _this.$el.removeClass('edit');
-          },
-          'keyup textarea': this.update140
+          }
         };
       };
 
       TaskView.prototype.render = function() {
-        var diff, json, text;
-        diff = this.model.get('date') - this.model.get('startDate');
-        diff = Math.round(diff / 60000);
+        var json, text;
         text = this.model.get("text");
-        text = _.escape(text);
         text = text.replace(this.regexp, '<a class="tag" href="#/tagged/$1" data-tag="$1">#$1</a>');
         json = _.extend(this.model.toJSON(), {
-          text: text,
-          time: diff,
+          displayText: text,
           date: moment(this.model.get("date")).format("LLLL")
         });
         this.$el.html(this.template(json));
         this.$el.toggleClass('break', this.model.get('isBreak'));
         this.input = this.$el.find('textarea');
+        this.input.focus();
         return this;
       };
 
@@ -68,9 +68,11 @@
         while ((myArray = this.regexp.exec(text)) !== null) {
           tags.push(myArray[1]);
         }
-        console.log(tags);
-        this.model.save('text', text);
-        return this.model.save('tags', tags);
+        return this.model.save({
+          text: text,
+          tags: tags,
+          saved: true
+        });
       };
 
       TaskView.prototype.update140 = function(e) {

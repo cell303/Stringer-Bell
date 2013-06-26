@@ -48,18 +48,36 @@
             });
             _this.$el.find("#timeline").append(view.render().el);
           }
-          return _this.$el.find("#sum").text(_this.sum);
+          return _this.setSum();
         });
+      };
+
+      TasksView.prototype.setSum = function() {
+        var hours, minutes;
+        if (this.sum > 60) {
+          hours = Math.floor(this.sum / 60);
+          minutes = this.sum % 60;
+          return this.$el.find("#sum").text(hours + '" ' + minutes);
+        } else {
+          return this.$el.find("#sum").text(this.sum);
+        }
       };
 
       TasksView.prototype.add = function(task) {
         var view;
+        if (this.model.get("tag") != null) {
+          task.set("text", "#" + this.model.get("tag"));
+          task.set("tags", [this.model.get("tag")]);
+        }
         view = new TaskView({
           model: task
         });
         this.$el.find("#timeline").prepend(view.render().el);
         this.sum += task.get("time");
-        return this.$el.find("#sum").text(this.sum);
+        this.setSum();
+        if ($(':focus').length === 0) {
+          return view.$el.find('textarea').focus();
+        }
       };
 
       return TasksView;
