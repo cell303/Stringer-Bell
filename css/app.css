@@ -6,6 +6,15 @@ body {
   padding: 10px 25px;
   background-color: #f0f0f0;
   font-family: Georgia;
+  overflow-y: scroll;
+}
+
+a, a:visited {
+  color: #333;
+}
+a.tag, a.tag:visited {
+  //color: #551a8b;
+  color: #999;
 }
  
 h1, h2, h3, h4, h5, h6 {
@@ -317,8 +326,8 @@ audio {
 
 .task {
   margin-bottom: 15px;
-  padding-bottom: 10px;
-  border-bottom: 1px solid #ccc;
+  padding-top: 15px;
+  border-top: 1px solid #ccc;
 }
 
 #timeline .task .time {
