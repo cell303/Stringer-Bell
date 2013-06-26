@@ -27,27 +27,32 @@
       TasksView.prototype.sum = 0;
 
       TasksView.prototype.render = function() {
-        var _this = this;
+        var newTask,
+          _this = this;
+        newTask = function(task) {
+          if (!_this.prevTask || (new Date(_this.prevTask.get("date"))).getDate() !== (new Date(task.get("date"))).getDate()) {
+            _this.$el.find("#timeline").append('<p class="new-day">' + moment(task.get("date")).format("dddd, MMMM Do") + '</p>');
+          }
+          _this.sum += task.get("time");
+          _this.view = new TaskView({
+            model: task
+          });
+          _this.$el.find("#timeline").append(_this.view.render().el);
+          return _this.prevTask = task;
+        };
         this.$el.html(this.template(this.model.toJSON()));
+        this.prevTask = null;
         this.tags = [];
         this.sum = 0;
         this.model.tasks.each(function(task) {
-          var tag, view;
+          var tag;
           if (_this.model.get("tag") != null) {
             tag = _this.model.get("tag");
             if ((task.attributes.tags != null) && _.contains(task.attributes.tags, tag)) {
-              _this.sum += task.get("time");
-              view = new TaskView({
-                model: task
-              });
-              _this.$el.find("#timeline").append(view.render().el);
+              newTask(task);
             }
           } else {
-            _this.sum += task.get("time");
-            view = new TaskView({
-              model: task
-            });
-            _this.$el.find("#timeline").append(view.render().el);
+            newTask(task);
           }
           return _.each(task.get("tags"), function(tag) {
             return _this.tags.push(tag);
@@ -64,18 +69,21 @@
           task.set("text", "#" + this.model.get("tag"));
           task.set("tags", [this.model.get("tag")]);
         }
+        this.sum += task.get("time");
+        if (this.$el.find("#timeline .new-day").length === 0) {
+          this.$el.find("#timeline").append('<p class="new-day">' + moment(task.get("date")).format("dddd, MMMM Do") + '</p>');
+        }
         view = new TaskView({
           model: task
         });
-        this.$el.find("#timeline").prepend(view.render().el);
-        this.sum += task.get("time");
-        this.setSum();
+        this.$el.find("#timeline .new-day").first().after(view.render().el);
         if ($(':focus').length === 0) {
           view.$el.find('textarea').focus();
         }
         _.each(task.get("tags"), function(tag) {
           return _this.tags.unshift(tag);
         });
+        this.setSum();
         return this.setTags();
       };
 

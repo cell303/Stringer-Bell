@@ -37,7 +37,7 @@ define [
 
       json = _.extend @model.toJSON(),
         displayText: text
-        date: moment(@model.get("date")).format("LLLL")
+        date: moment(@model.get("date")).format("h:mm a")
 
       @$el.html(@template(json))
       @$el.toggleClass 'break', @model.get('isBreak')

@@ -379,3 +379,7 @@ audio {
 #tag-cloud {
   text-align: justify;
 }
+
+.new-day {
+  text-align: center; margin-top: 35px;
+}

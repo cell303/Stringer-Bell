@@ -27,22 +27,27 @@ define [
     # initializes the jQuery Mobile widgets and 
     # adjusts the size.
     render: =>
+      newTask = (task) =>
+        if !@prevTask or (new Date(@prevTask.get("date"))).getDate() isnt (new Date(task.get("date"))).getDate()
+          @$el.find("#timeline").append '<p class="new-day">' + moment(task.get("date")).format("dddd, MMMM Do") + '</p>'
+
+        @sum += task.get "time"
+        @view = new TaskView model: task
+        @$el.find("#timeline").append(@view.render().el)
+        @prevTask = task
+
       @$el.html(@template(@model.toJSON()))
 
+      @prevTask = null
       @tags = []
       @sum = 0
       @model.tasks.each (task) =>
         if @model.get("tag")?
           tag = @model.get "tag"
           if task.attributes.tags? and _.contains(task.attributes.tags, tag)
-            @sum += task.get "time"
-            view = new TaskView model: task
-            @$el.find("#timeline").append(view.render().el)
-
+            newTask task
         else
-            @sum += task.get "time"
-            view = new TaskView model: task
-            @$el.find("#timeline").append(view.render().el)
+            newTask task
 
         _.each task.get("tags"), (tag) => @tags.push(tag)
 
@@ -54,13 +59,18 @@ define [
         task.set("text", "#"+@model.get("tag"))
         task.set("tags", [@model.get("tag")])
 
-      view = new TaskView model: task
-      @$el.find("#timeline").prepend(view.render().el)
       @sum += task.get "time"
-      @setSum()
+      if @$el.find("#timeline .new-day").length is 0 
+        @$el.find("#timeline").append '<p class="new-day">' + moment(task.get("date")).format("dddd, MMMM Do") + '</p>'
+
+      view = new TaskView model: task
+      @$el.find("#timeline .new-day").first().after(view.render().el)
+
       if $(':focus').length is 0 then view.$el.find('textarea').focus()
 
       _.each task.get("tags"), (tag) => @tags.unshift(tag)
+
+      @setSum()
       @setTags()
 
     setSum: ->

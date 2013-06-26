@@ -52,7 +52,7 @@
         text = text.replace(this.regexp, '<a class="tag" href="#/tagged/$1" data-tag="$1">#$1</a>');
         json = _.extend(this.model.toJSON(), {
           displayText: text,
-          date: moment(this.model.get("date")).format("LLLL")
+          date: moment(this.model.get("date")).format("h:mm a")
         });
         this.$el.html(this.template(json));
         this.$el.toggleClass('break', this.model.get('isBreak'));
