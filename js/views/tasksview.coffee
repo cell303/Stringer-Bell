@@ -29,7 +29,7 @@ define [
     render: =>
       @$el.html(@template(@model.toJSON()))
 
-      #@tags = []
+      @tags = []
       @sum = 0
       @model.tasks.each (task) =>
         if @model.get("tag")?
@@ -39,23 +39,15 @@ define [
             view = new TaskView model: task
             @$el.find("#timeline").append(view.render().el)
 
-            #_.each(task.get("tags"), (tag) => @tags.push(tag))
         else
             @sum += task.get "time"
             view = new TaskView model: task
             @$el.find("#timeline").append(view.render().el)
 
-            #_.each(task.get("tags"), (tag) => @tags.push(tag))
+        _.each task.get("tags"), (tag) => @tags.push(tag)
 
-        @setSum()
-
-    setSum: ->
-      if @sum > 60
-        hours = Math.floor(@sum/60)
-        minutes = @sum%60
-        @$el.find("#sum").text hours+'" '+minutes
-      else
-        @$el.find("#sum").text @sum
+      @setSum()
+      @setTags()
 
     add: (task) =>
       if @model.get("tag")? 
@@ -68,6 +60,22 @@ define [
       @setSum()
       if $(':focus').length is 0 then view.$el.find('textarea').focus()
 
-      #_.each(task.get("tags"), (tag) => @tags.unshift(tag))
+      _.each task.get("tags"), (tag) => @tags.unshift(tag)
+      @setTags()
+
+    setSum: ->
+      if @sum > 60
+        hours = Math.floor(@sum/60)
+        minutes = @sum%60
+        @$el.find("#sum").text hours+'h '+minutes
+      else
+        @$el.find("#sum").text @sum
+
+    setTags: ->
+      @tags = _.first _.unique(@tags), 10
+      @$el.find("#tags").html('')
+      _.each @tags, (tag) =>
+        @$el.find("#tags").append '<a class="tag" href="#/tagged/'+tag+'" data-tag="'+tag+'">#'+tag+'</a> '
+
 
   return TasksView

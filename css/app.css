@@ -375,3 +375,7 @@ audio {
 .ui-loader {
   display: none!important;
 }
+
+#tag-cloud {
+  text-align: justify;
+}

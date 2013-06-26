@@ -18,6 +18,7 @@ define [
 
     # These default values should match those in the template.
     defaults:
+      canShowNotifications: false
       syncSecond: 0
       syncMinute: 0
       syncHour: 0
@@ -102,7 +103,7 @@ define [
         document.getElementById('bell').load()
         document.getElementById('bell').play()
 
-      if @canShowNotifications
+      if @get('canShowNotifications')
         if window.webkitNotifications.checkPermission() is 0
 
           if @get('isBreak')
@@ -137,7 +138,7 @@ define [
         @canPlayMp3 = !!myAudio.canPlayType and myAudio.canPlayType('audio/mpeg') isnt ''
         @canPlayOgg = !!myAudio.canPlayType and myAudio.canPlayType('audio/ogg; codecs="vorbis"') isnt ''
 
-      @canShowNotifications = (window.webkitNotifications)
+      @set 'canShowNotifications', (window.webkitNotifications)
 
     # Setter method.
     # Will reset the clock if the new value is smaller then 

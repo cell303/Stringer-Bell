@@ -23,6 +23,7 @@
       ClockModel.prototype.url = '/clock';
 
       ClockModel.prototype.defaults = {
+        canShowNotifications: false,
         syncSecond: 0,
         syncMinute: 0,
         syncHour: 0,
@@ -106,7 +107,7 @@
           document.getElementById('bell').load();
           document.getElementById('bell').play();
         }
-        if (this.canShowNotifications) {
+        if (this.get('canShowNotifications')) {
           if (window.webkitNotifications.checkPermission() === 0) {
             if (this.get('isBreak')) {
               notification = window.webkitNotifications.createNotification('/images/icon128.png', 'Your break is over!', '');
@@ -143,7 +144,7 @@
           this.canPlayMp3 = !!myAudio.canPlayType && myAudio.canPlayType('audio/mpeg') !== '';
           this.canPlayOgg = !!myAudio.canPlayType && myAudio.canPlayType('audio/ogg; codecs="vorbis"') !== '';
         }
-        return this.canShowNotifications = window.webkitNotifications;
+        return this.set('canShowNotifications', window.webkitNotifications);
       };
 
       ClockModel.prototype.setWorkTime = function(value) {

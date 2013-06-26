@@ -29,8 +29,9 @@
       TasksView.prototype.render = function() {
         var _this = this;
         this.$el.html(this.template(this.model.toJSON()));
+        this.tags = [];
         this.sum = 0;
-        return this.model.tasks.each(function(task) {
+        this.model.tasks.each(function(task) {
           var tag, view;
           if (_this.model.get("tag") != null) {
             tag = _this.model.get("tag");
@@ -48,23 +49,17 @@
             });
             _this.$el.find("#timeline").append(view.render().el);
           }
-          return _this.setSum();
+          return _.each(task.get("tags"), function(tag) {
+            return _this.tags.push(tag);
+          });
         });
-      };
-
-      TasksView.prototype.setSum = function() {
-        var hours, minutes;
-        if (this.sum > 60) {
-          hours = Math.floor(this.sum / 60);
-          minutes = this.sum % 60;
-          return this.$el.find("#sum").text(hours + '" ' + minutes);
-        } else {
-          return this.$el.find("#sum").text(this.sum);
-        }
+        this.setSum();
+        return this.setTags();
       };
 
       TasksView.prototype.add = function(task) {
-        var view;
+        var view,
+          _this = this;
         if (this.model.get("tag") != null) {
           task.set("text", "#" + this.model.get("tag"));
           task.set("tags", [this.model.get("tag")]);
@@ -76,8 +71,32 @@
         this.sum += task.get("time");
         this.setSum();
         if ($(':focus').length === 0) {
-          return view.$el.find('textarea').focus();
+          view.$el.find('textarea').focus();
         }
+        _.each(task.get("tags"), function(tag) {
+          return _this.tags.unshift(tag);
+        });
+        return this.setTags();
+      };
+
+      TasksView.prototype.setSum = function() {
+        var hours, minutes;
+        if (this.sum > 60) {
+          hours = Math.floor(this.sum / 60);
+          minutes = this.sum % 60;
+          return this.$el.find("#sum").text(hours + 'h ' + minutes);
+        } else {
+          return this.$el.find("#sum").text(this.sum);
+        }
+      };
+
+      TasksView.prototype.setTags = function() {
+        var _this = this;
+        this.tags = _.first(_.unique(this.tags), 10);
+        this.$el.find("#tags").html('');
+        return _.each(this.tags, function(tag) {
+          return _this.$el.find("#tags").append('<a class="tag" href="#/tagged/' + tag + '" data-tag="' + tag + '">#' + tag + '</a> ');
+        });
       };
 
       return TasksView;
