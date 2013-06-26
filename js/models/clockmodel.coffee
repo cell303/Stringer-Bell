@@ -92,9 +92,16 @@ define [
         @set('isBreak': !@get('isBreak'))
         @min = 0
 
+
     # Notifies the user that a time slice has been completed.
     # Currently only chrome/html5 notifications are supproted.
     notifyUser: =>
+      @newTask()
+
+      if @get('sound') and (@canPlayMp3 or @canPlayOgg)
+        document.getElementById('bell').load()
+        document.getElementById('bell').play()
+
       if @canShowNotifications
         if window.webkitNotifications.checkPermission() is 0
 
@@ -102,12 +109,6 @@ define [
             notification = window.webkitNotifications.createNotification '/images/icon128.png', 'Your break is over!', ''
           else
             notification = window.webkitNotifications.createNotification '/images/icon128.png', 'Time to take a break!', ''
-
-          if @get('sound') and (@canPlayMp3 or @canPlayOgg)
-            document.getElementById('bell').load()
-            document.getElementById('bell').play()
-
-          @newTask()
 
           notification.show()
           setTimeout ->

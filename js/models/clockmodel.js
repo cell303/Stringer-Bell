@@ -101,6 +101,11 @@
 
       ClockModel.prototype.notifyUser = function() {
         var notification;
+        this.newTask();
+        if (this.get('sound') && (this.canPlayMp3 || this.canPlayOgg)) {
+          document.getElementById('bell').load();
+          document.getElementById('bell').play();
+        }
         if (this.canShowNotifications) {
           if (window.webkitNotifications.checkPermission() === 0) {
             if (this.get('isBreak')) {
@@ -108,11 +113,6 @@
             } else {
               notification = window.webkitNotifications.createNotification('/images/icon128.png', 'Time to take a break!', '');
             }
-            if (this.get('sound') && (this.canPlayMp3 || this.canPlayOgg)) {
-              document.getElementById('bell').load();
-              document.getElementById('bell').play();
-            }
-            this.newTask();
             notification.show();
             return setTimeout(function() {
               return notification.cancel();
