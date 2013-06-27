@@ -216,10 +216,6 @@
         }
       };
 
-      ClockModel.prototype.tweet = function(text) {
-        return console.log('empty');
-      };
-
       ClockModel.prototype.localStorage = new Backbone.LocalStorage('clock');
 
       return ClockModel;

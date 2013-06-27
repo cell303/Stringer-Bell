@@ -140,7 +140,6 @@ define [
 
       @set 'canShowNotifications', (window.webkitNotifications)
 
-    # Setter method.
     # Will reset the clock if the new value is smaller then 
     # the time that already passed in the current time slice.
     # @param {number} value The new value.
@@ -150,7 +149,6 @@ define [
       @set('workTime': value)
       @save()
 
-    # Setter method.
     # Will reset the clock if the new value is smaller then 
     # the time that already passed in the current time slice.
     # @param {number} value The new value.
@@ -205,9 +203,6 @@ define [
     # Pauses the clock by clearing the interval.
     stopClock: =>
       if @interval? then clearInterval(@interval)
-
-    tweet: (text) ->
-      console.log 'empty'
 
     localStorage: new Backbone.LocalStorage 'clock'
   
