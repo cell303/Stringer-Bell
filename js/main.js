@@ -5,13 +5,14 @@
 
   require.config({
     paths: {
-      jquery: 'lib/jquery-2.0.2',
-      underscore: 'lib/underscore-1.4.4',
-      backbone: 'lib/backbone-1.0.0',
-      localstorage: "lib/backbone.localStorage",
-      order: 'lib/order',
-      text: 'lib/text',
-      bootstrap: 'lib/bootstrap'
+      jquery: 'vendor/jquery-2.0.2',
+      underscore: 'vendor/underscore-1.4.4',
+      backbone: 'vendor/backbone-1.0.0',
+      localstorage: "vendor/backbone.localStorage",
+      order: 'vendor/order',
+      text: 'vendor/text',
+      bootstrap: 'vendor/bootstrap',
+      moment: 'vendor/moment'
     },
     shim: {
       underscore: {

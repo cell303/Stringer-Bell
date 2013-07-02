@@ -3,8 +3,9 @@ define [
   'underscore'
   'backbone'
   'views/taskview'
+  'moment'
   'text!templates/tasks.html'
-], ($, _, Backbone, TaskView, tasksTemplate) ->
+], ($, _, Backbone, TaskView, moment, tasksTemplate) ->
 
   class TasksView extends Backbone.View
     
@@ -41,6 +42,7 @@ define [
       @prevTask = null
       @tags = []
       @sum = 0
+
       @model.tasks.each (task) =>
         if @model.get("tag")?
           tag = @model.get "tag"
